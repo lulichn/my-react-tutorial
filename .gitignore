@@ -2,5 +2,7 @@
 .idea/
 .vertx/
 build/
+node_modules/
 
 comments.json
+public/bundle.js
