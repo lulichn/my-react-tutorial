@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import TextField from 'material-ui/TextField';
 
 export default class CommentForm extends React.Component {
     handleSubmit(event) {
@@ -19,11 +20,14 @@ export default class CommentForm extends React.Component {
 
     render() {
         return (
-            <form className = "commentForm" onSubmit = { this.handleSubmit.bind(this) } >
-                <input type = "text" placeholder = "Your Name" ref = 'author' />
-                <input type = "text" placeholder = "Say something!" ref = 'text'  />
-                <input type = "submit" value = "Post" />
-            </form>
+            <div>
+                <TextField hintTest = 'Hint!' />
+            </div>
+            // <form className = "commentForm" onSubmit = { this.handleSubmit.bind(this) } >
+            //     <input type = "text" placeholder = "Your Name" ref = 'author' />
+            //     <input type = "text" placeholder = "Say something!" ref = 'text'  />
+            //     <input type = "submit" value = "Post" />
+            // </form>
         );
     }
 }

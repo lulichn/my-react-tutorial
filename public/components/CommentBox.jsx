@@ -4,6 +4,12 @@ import $ from 'jquery';
 import CommentList from './CommentList';
 import CommentForm from './CommentForm';
 
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+
+const darkMuiTheme = getMuiTheme(darkBaseTheme);
+
 export default class CommentBox extends React.Component {
     constructor(props) {
         super(props);
@@ -49,11 +55,13 @@ export default class CommentBox extends React.Component {
 
     render() {
         return (
-            <div className = "commentBox">
-                <h1>Comments</h1>
-                <CommentList data = { this.state.data } />
-                <CommentForm onCommentSubmit = { this.handleCommentSubmit.bind(this) } />
-            </div>
+            <MuiThemeProvider muiTheme = { darkMuiTheme }>
+                <div className = "commentBox">
+                    <h1>Comments</h1>
+                    <CommentList data = { this.state.data } />
+                    <CommentForm onCommentSubmit = { this.handleCommentSubmit.bind(this) } />
+                </div>
+            </MuiThemeProvider>
         );
     }
 }
