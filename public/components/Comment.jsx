@@ -1,6 +1,9 @@
 import React from 'react';
 import marked from 'marked';
 
+import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from 'material-ui/Table';
+
+
 export default class Comment extends React.Component {
     rawMarkup() {
         const rawMarkup = marked(this.props.children.toString(), { sanitize: true });
@@ -9,12 +12,15 @@ export default class Comment extends React.Component {
 
     render() {
         return (
-            <div className = "comment">
-                <h2 className = "commentAuthor">
+            <TableRow
+                key = { this.props.author } >
+                <TableRowColumn>
                     { this.props.author }
-                </h2>
-                <span dangerouslySetInnerHTML = { this.rawMarkup() } />
-            </div>
+                </TableRowColumn>
+                <TableRowColumn>
+                    <span dangerouslySetInnerHTML = { this.rawMarkup() } />
+                </TableRowColumn>
+            </TableRow>
         );
     }
 }

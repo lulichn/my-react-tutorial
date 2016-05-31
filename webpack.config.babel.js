@@ -1,12 +1,16 @@
 
-const DEBUG = !process.argv.includes('--release');
-const VERBOSE = process.argv.includes('--verbose');
+// const DEBUG = !process.argv.includes('--release');
+// const VERBOSE = process.argv.includes('--verbose');
+
+import webpack from 'webpack';
 
 export default {
-    cache: DEBUG,
-    debug: DEBUG,
+    // cache: DEBUG,
+    // debug: DEBUG,
 
-    entry: './public/components/app.js',
+    devtool: 'eval',
+
+    entry: './public/components/index.js',
 
     output: {
         path: './public',
@@ -25,5 +29,11 @@ export default {
 
     resolve: {
         extensions: ['', '.js', '.jsx']
-    }
+    },
+
+    plugins: [
+        new webpack.optimize.UglifyJsPlugin({
+            minimize: true
+        })
+    ]
 };

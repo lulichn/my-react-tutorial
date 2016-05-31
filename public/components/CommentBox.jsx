@@ -1,14 +1,11 @@
 import React from 'react';
 import $ from 'jquery';
 
+import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColumn} from 'material-ui/Table';
+
+
 import CommentList from './CommentList';
 import CommentForm from './CommentForm';
-
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-
-const darkMuiTheme = getMuiTheme(darkBaseTheme);
 
 export default class CommentBox extends React.Component {
     constructor(props) {
@@ -55,13 +52,26 @@ export default class CommentBox extends React.Component {
 
     render() {
         return (
-            <MuiThemeProvider muiTheme = { darkMuiTheme }>
-                <div className = "commentBox">
-                    <h1>Comments</h1>
-                    <CommentList data = { this.state.data } />
-                    <CommentForm onCommentSubmit = { this.handleCommentSubmit.bind(this) } />
-                </div>
-            </MuiThemeProvider>
+            <div className = "commentBox">
+                <Table
+                    height = { 300 }
+                    fixedHeader = { true } >
+                    <TableHeader
+                        displaySelectAll = { false }
+                        adjustForCheckbox = { false } >
+                        <TableRow>
+                            <TableHeaderColumn>Author</TableHeaderColumn>
+                            <TableHeaderColumn>Comment</TableHeaderColumn>
+                        </TableRow>
+                    </TableHeader>
+                    <TableBody
+                        displayRowCheckbox = { false } >
+                        <CommentList data = { this.state.data } />
+                    </TableBody>
+                </Table>
+                <br />
+                <CommentForm onCommentSubmit = { this.handleCommentSubmit.bind(this) } />
+            </div>
         );
     }
 }

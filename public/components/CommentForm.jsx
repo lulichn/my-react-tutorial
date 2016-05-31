@@ -1,33 +1,70 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import TextField from 'material-ui/TextField';
+import RaisedButton from 'material-ui/RaisedButton';
 
 export default class CommentForm extends React.Component {
-    handleSubmit(event) {
-        event.preventDefault();
-        const author = ReactDOM.findDOMNode(this.refs.author).value.trim();
-        const text = ReactDOM.findDOMNode(this.refs.text).value.trim();
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            author: '',
+            commentText: ''
+        };
+    }
+
+    onChangeAuthor(e) {
+        this.setState({ author: e.target.value });
+    }
+
+    onChangeCommentText(e) {
+        this.setState({ commentText: e.target.value });
+    }
+
+    handleSubmit(e) {
+        e.preventDefault();
+
+        const author = this.state.author;
+        const text = this.state.commentText;
 
         if (!text || !author) return;
 
-        this.props.onCommentSubmit({ author: author, text: text });
+        this.props.onCommentSubmit({author: author, text: text });
 
-        ReactDOM.findDOMNode(this.refs.author).value = '';
-        ReactDOM.findDOMNode(this.refs.text).value = '';
+        this.setState({
+            author: '',
+            commentText: ''
+        });
 
-        return false;
+        // this.refs._author.value = '';
+        // ReactDOM.findDOMNode(this.refs._author).value = '';
+        // this.refs._author.setState({ value: '' });
     }
 
     render() {
         return (
             <div>
-                <TextField hintTest = 'Hint!' />
+                <TextField
+                    name = '_author'
+                    ref = '_author'
+                    hintText = 'Your Name'
+                    value = { this.author }
+                    onChange = { this.onChangeAuthor.bind(this) }
+                />
+                <br />
+                <TextField
+                    name = '_commentText'
+                    ref = '_commentText'
+                    hintText = 'Comment'
+                    value = { this.commentText }
+                    onChange = { this.onChangeCommentText.bind(this) }
+                />
+                <br />
+                <RaisedButton
+                    label="Submit"
+                    onClick = { this.handleSubmit.bind(this) }
+                />
             </div>
-            // <form className = "commentForm" onSubmit = { this.handleSubmit.bind(this) } >
-            //     <input type = "text" placeholder = "Your Name" ref = 'author' />
-            //     <input type = "text" placeholder = "Say something!" ref = 'text'  />
-            //     <input type = "submit" value = "Post" />
-            // </form>
         );
     }
 }
