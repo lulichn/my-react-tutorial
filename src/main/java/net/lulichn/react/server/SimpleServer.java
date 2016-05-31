@@ -47,7 +47,7 @@ public class SimpleServer extends AbstractVerticle {
 		return context -> {
 			context.request().bodyHandler(body -> {
 				Map<String, Object> formData = Arrays.stream(body.toString().split("&"))
-					.map(v ->v.split("="))
+					.map(v -> v.split("="))
 					.collect(Collectors.toMap(v -> v[0], v -> v[1]));
 
 				System.out.println(formData);
