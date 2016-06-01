@@ -52,24 +52,8 @@ export default class CommentBox extends React.Component {
 
     render() {
         return (
-            <div className = "commentBox">
-                <Table
-                    height = { 300 }
-                    fixedHeader = { true } >
-                    <TableHeader
-                        displaySelectAll = { false }
-                        adjustForCheckbox = { false } >
-                        <TableRow>
-                            <TableHeaderColumn>Author</TableHeaderColumn>
-                            <TableHeaderColumn>Comment</TableHeaderColumn>
-                        </TableRow>
-                    </TableHeader>
-                    <TableBody
-                        displayRowCheckbox = { false } >
-                        <CommentList data = { this.state.data } />
-                    </TableBody>
-                </Table>
-                <br />
+            <div>
+                <CommentList data = { this.state.data } />
                 <CommentForm onCommentSubmit = { this.handleCommentSubmit.bind(this) } />
             </div>
         );
